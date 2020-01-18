@@ -1,2 +1,3 @@
 # DoxyX2M
-Convert XML Doxygen to MarkDown using PHP.
+
+Convert XML [Doxygen](http://www.doxygen.nl/) to MD using PHP.
