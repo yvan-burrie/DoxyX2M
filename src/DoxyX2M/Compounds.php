@@ -9,6 +9,8 @@ namespace DoxyXM;
 use \UnexpectedValueException, \InvalidArgumentException;
 use \SimpleXMLElement, \SplDoublyLinkedList;
 
+
+
 /**
  * @package DoxyXM
  */
@@ -160,6 +162,11 @@ abstract class Compound extends Entity
      */
     protected $members;
 
+    public function getMembers()
+    {
+        return $this->members;
+    }
+
     protected function __construct()
     {
         parent::__construct();
@@ -243,11 +250,11 @@ class FileCompound extends Compound
 
 }
 
-abstract class Member
+abstract class Member extends Entity
 {
-    public static function fromXmlBuffer(SimpleXMLElement $memberBuffer): self
+    public static function fromXmlBuffer(SimpleXMLElement $memberBuffer): Entity
     {
-        $member = new static();
+        $member = parent::fromXmlBuffer($memberBuffer);
         return $member;
     }
 }
@@ -274,7 +281,12 @@ class TypeDefMember extends Member
 
 class ClassMember extends Member
 {
-
+    public static function fromXmlBuffer(SimpleXMLElement $memberBuffer): Entity
+    {
+        $member = parent::fromXmlBuffer($memberBuffer);
+        echo $memberBuffer->children();
+        return $member;
+    }
 }
 
 class FunctionMember extends Member
